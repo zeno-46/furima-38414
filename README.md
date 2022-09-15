@@ -1,14 +1,14 @@
 usersテーブル
-|Column             |Type  |Options             |
-|-------------------|------|--------------------|
-|nickname           |string|not null            |
-|email              |string|not null,ユニーク制約 |
-|encrypted_password |string|not null            |
-|first_name         |string|not null            |
-|last_name          |string|not null            |
-|first_name_kana    |string|not null            |
-|last_name_kana     |string|not null            |
-|birthday           |date  |not null            |
+|Column             |Type  |Options                  |
+|-------------------|------|-------------------------|
+|nickname           |string|null: false              |
+|email              |string|null: false, unique: true|
+|encrypted_password |string|null: false              |
+|first_name         |string|null: false              |
+|last_name          |string|null: false              |
+|first_name_kana    |string|null: false              |
+|last_name_kana     |string|null: false              |
+|birthday           |date  |null: false              |
 
 ###Association
 has_many :purchases
@@ -16,17 +16,17 @@ has_many :items
 
 
 itemsテーブル
-|Column             |Type      |Options             |
-|-------------------|----------|--------------------|
-|name               |string    |not null            |
-|explanation        |text      |not null            |
-|category           |integer   |not null            |
-|status             |integer   |not null            |
-|delivery_fee       |integer   |not null            |
-|prefecture         |integer   |not null            |
-|scheduled_delivery |integer   |not null            |
-|price              |integer   |not null            |
-|user               |references|not null, 外部キー    |
+|Column                |Type      |Options                       |
+|----------------------|----------|------------------------------|
+|name                  |string    |null: false                   |
+|explanation           |text      |null: false                   |
+|category_id           |integer   |null: false                   |
+|status_id             |integer   |null: false                   |
+|delivery_fee_id       |integer   |null: false                   |
+|prefecture_id         |integer   |null: false                   |
+|scheduled_delivery_id |integer   |null: false                   |
+|price                 |integer   |null: false                   |
+|user                  |references|null: false, foreign_key: true|
 
 ###Association
 belongs_to :user
@@ -34,10 +34,10 @@ has_one :purchase
 
 
 purchasesテーブル
-|Column             |Type      |Options             |
-|-------------------|----------|--------------------|
-|user               |references|not null,外部キー     |
-|item               |references|not null,外部キー     |
+|Column             |Type      |Options                       |
+|-------------------|----------|------------------------------|
+|user               |references|null: false, foreign_key: true|
+|item               |references|null: false, foreign_key: true|
 
 ###Association
 belongs_to :user
@@ -45,16 +45,16 @@ belongs_to :item
 has_one :address
 
 
-addressテーブル
-|Column             |Type      |Options             |
-|-------------------|----------|--------------------|
-|postal_code        |string    |not null            |
-|prefecture         |integer   |not null            |
-|city               |string    |not null            |
-|house_number       |string    |not null            |
-|building_name      |string    |not null            |
-|tel                |string    |not null            |
-|purchase           |references|not null,外部キー     |
+addressesテーブル
+|Column             |Type      |Options                       |
+|-------------------|----------|------------------------------|
+|postal_code        |string    |null: false                   |
+|prefecture_id      |integer   |null: false                   |
+|city               |string    |null: false                   |
+|house_number       |string    |null: false                   |
+|building_name      |string    |                              |
+|tel                |string    |null: false                   |
+|purchase           |references|null: false, foreign_key: true|
 
 ###Association
 belongs_to :purchase
