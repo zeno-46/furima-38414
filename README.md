@@ -1,24 +1,60 @@
-# README
+usersテーブル
+|Column             |Type  |Options             |
+|-------------------|------|--------------------|
+|nickname           |string|not null            |
+|email              |string|not null,ユニーク制約 |
+|encrypted_password |string|not null            |
+|first_name         |string|not null            |
+|last_name          |string|not null            |
+|first_name_kana    |string|not null            |
+|last_name_kana     |string|not null            |
+|birthday           |date  |not null            |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+###Association
+has_many :purchases
+has_many :items
 
-Things you may want to cover:
 
-* Ruby version
+itemsテーブル
+|Column             |Type      |Options             |
+|-------------------|----------|--------------------|
+|name               |string    |not null            |
+|explanation        |text      |not null            |
+|category           |integer   |not null            |
+|status             |integer   |not null            |
+|delivery_fee       |integer   |not null            |
+|prefecture         |integer   |not null            |
+|scheduled_delivery |integer   |not null            |
+|price              |integer   |not null            |
+|user               |references|not null, 外部キー    |
 
-* System dependencies
+###Association
+belongs_to :user
+has_one :purchase
 
-* Configuration
 
-* Database creation
+purchasesテーブル
+|Column             |Type      |Options             |
+|-------------------|----------|--------------------|
+|user               |references|not null,外部キー     |
+|item               |references|not null,外部キー     |
 
-* Database initialization
+###Association
+belongs_to :user
+belongs_to :item
+has_one :address
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+addressテーブル
+|Column             |Type      |Options             |
+|-------------------|----------|--------------------|
+|postal_code        |string    |not null            |
+|prefecture         |integer   |not null            |
+|city               |string    |not null            |
+|house_number       |string    |not null            |
+|building_name      |string    |not null            |
+|tel                |string    |not null            |
+|purchase           |references|not null,外部キー     |
 
-* Deployment instructions
-
-* ...
+###Association
+belongs_to :purchase
