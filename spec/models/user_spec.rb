@@ -12,8 +12,6 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'passwordが6文字以上の半角英数字であれば登録できる' do
-        @user.password = 'a123456'
-        @user.password_confirmation = 'a123456'
         expect(@user).to be_valid
       end
     end
