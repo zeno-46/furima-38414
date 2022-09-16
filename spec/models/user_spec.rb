@@ -11,9 +11,6 @@ RSpec.describe User, type: :model do
       it "必須項目が全てあれば登録できる" do
         expect(@user).to be_valid
       end
-      it 'passwordが6文字以上の半角英数字であれば登録できる' do
-        expect(@user).to be_valid
-      end
     end
 
   context '新規登録ができないとき' do
@@ -107,9 +104,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'last_nameが全角（漢字・ひらがな・カタカナ）以外だとユーザー登録できない' do
-      @user.first_name = 'フリマ'
+      @user.last_name = 'フリマ'
       @user.valid?
-      expect(@user.errors.full_messages).to include
+      expect(@user.errors.full_messages).to include"last_name is invalid"
     end
 
     it 'first_nameが全角（漢字・ひらがな・カタカナ）以外だとユーザー登録できない' do
