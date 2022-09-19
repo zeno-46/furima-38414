@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :delivery_fee
   belongs_to :prefecture
-  belongs_to :schedeled_delivery
+  belongs_to :scheduled_delivery
   
   validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
