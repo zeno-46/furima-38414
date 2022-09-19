@@ -15,4 +15,9 @@ class Item < ApplicationRecord
   validates :delivery_fee_id, numericality: { other_than: 1 }
   validates :prefecture_id, numericality: { other_than: 1 }
   validates :scheduled_delivery_id, numericality: {other_than: 1 }
+  validates :image, presence: true
+  validates :name, presence: true
+  validates :explanation, presence: true
+  validates :price, numericality: { greater_than_or_equal_to:300 ,less_than_or_equal_to:9999999}
+
 end
