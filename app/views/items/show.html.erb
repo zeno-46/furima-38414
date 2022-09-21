@@ -16,10 +16,10 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        <%#¥ 999,999,999%>
+         ¥<%= @item.price%>
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= @item.delivery_fee.name %>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
