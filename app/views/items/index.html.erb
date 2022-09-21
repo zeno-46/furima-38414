@@ -128,15 +128,15 @@
     </div>
     <ul class='item-lists'>
 
-      <%if @items != nil %>
+      <%if @items != [] %>
         <% @items.each do|item| %>
           <li class='list'>
             <%= link_to "#" do %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
-              <%#div class='sold-out'>
+              <div class='sold-out'>
                 <span>Sold Out!!</span>
-              </div%>
+              </div>
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
