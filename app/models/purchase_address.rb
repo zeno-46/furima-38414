@@ -8,8 +8,7 @@ class PurchaseAddress
   validates :prefecture_id, presence: true, numericality: { other_than: 1 }
   validates :city, presence: true
   validates :house_number, presence: true
-  validates :building_name, presence: true
-  validates :tel, presence: true
+  validates :tel, presence: true, format: { with: /\A\d{10,11}\z/ }
   validates :token, presence: true
   
   def save

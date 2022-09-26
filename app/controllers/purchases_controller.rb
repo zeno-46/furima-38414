@@ -4,9 +4,9 @@ class PurchasesController < ApplicationController
     @purchase_address = PurchaseAddress.new
   end
 
-  #def new
-    #@purchase_address = PurchaseAddress.new
-  #end
+  def new
+    @purchase_address = PurchaseAddress.new
+  end
 
   def create
     @item = Item.find(params[:item_id])
