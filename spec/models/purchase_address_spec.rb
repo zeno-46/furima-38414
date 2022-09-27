@@ -80,6 +80,24 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include "Tel is invalid"
         end
+
+        it 'カード情報が空欄だと登録できない' do
+          @purchase_address.token = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include "Token can't be blank"
+        end
+
+        it 'Userが紐付いていなければ購入できない' do
+          @purchase_address.user_id = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include "User can't be blank"
+        end
+
+        it 'Itemが紐付いていなければ購入できない' do
+          @purchase_address.item_id = ''
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include "Item can't be blank"
+        end
       end
     end
 end
