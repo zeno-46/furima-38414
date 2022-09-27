@@ -9,7 +9,7 @@ class PurchaseAddress
   validates :city, presence: true
   validates :house_number, presence: true
   validates :tel, presence: true, format: { with: /\A\d{10,11}\z/ }
-  #validates :token, presence: true
+  validates :token, presence: true
   
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id)
