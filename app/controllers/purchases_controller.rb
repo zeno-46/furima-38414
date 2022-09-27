@@ -1,15 +1,15 @@
 class PurchasesController < ApplicationController
-  def index
-    @item = Item.find(params[:item_id])
-    @purchase_address = PurchaseAddress.new
-  end
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :move_to_index
 
-  def new
+  def index
+    #@item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    #@item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       pay_item
@@ -21,6 +21,16 @@ class PurchasesController < ApplicationController
   end
 
 private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+     if (@item.user == current_user) || @item.purchase
+      redirect_to root_path
+     end
+  end
 
   def purchase_params
     params.require(:purchase_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :tel).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
